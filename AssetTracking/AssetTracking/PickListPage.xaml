@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AssetTracking.PickListPage">
+    <ContentPage.Content>
+        <StackLayout>
+            <StackLayout>
+                <Label Text="Pick List"
+                VerticalOptions="CenterAndExpand" 
+                HorizontalOptions="CenterAndExpand" 
+                FontSize="Large"/>
+                <Label Text="{Binding DisplayMessage}"/>
+                <Label Text="Scan Item to Add"/>
+                <Label Text="{Binding ScanType}"/>
+                <Label Text="{Binding ScanValue}"/>
+                <Label Text="{Binding ItemsList}"/>
+                <ListView ItemsSource="{Binding PickList}">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <TextCell Text="{Binding ItemDescription}"/>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+                <ActivityIndicator IsRunning="{Binding IsBusy}"/>
+                <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                    <Button Text="Refresh" Command="{Binding GetPickListItemsCommand}"/>
+                    <Button Text="Clear" Command="{Binding ClearPickListItemsCommand}"/>
+                </StackLayout>
+                <Picker Title ="Process" ItemsSource="{Binding CheckoutActionList}" SelectedItem="{Binding CheckoutAction, Mode=TwoWay}"/>
+            </StackLayout>
+
+
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

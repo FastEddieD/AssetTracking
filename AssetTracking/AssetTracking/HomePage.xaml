@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             x:Class="AssetTracking.HomePage">
+    <ContentPage.Content>
+        <StackLayout VerticalOptions="StartAndExpand">
+           <Label Text="MobiTrax" 
+           HorizontalOptions="Center" VerticalOptions="StartAndExpand" FontSize="Large"/>
+            <Label Text="Click on Image to Resume" HorizontalOptions="CenterAndExpand" VerticalOptions="StartAndExpand"/>
+            <ImageButton Source="logo.png" HorizontalOptions="FillAndExpand" Clicked="ResumeButton_Clicked" IsVisible="True" BorderColor="Beige" HeightRequest="250" WidthRequest="250"/>
+            <!--<Image Source="logo.png">
+                <Image.GestureRecognizers Tapped="ImageButton_Clicked"/>
+            </Image>-->  
+            <ActivityIndicator IsRunning="{Binding IsBusy}"/>
+            <Button Text="Startup" Clicked="StartButton_Clicked" HorizontalOptions="Center" FontSize="Medium" WidthRequest="200" HeightRequest="75"/>
+            <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                <Button Text="Connect Scanner" Clicked="ScannerTest_Clicked" HorizontalOptions="Start" FontSize="Medium" WidthRequest="200" HeightRequest="75"/>
+                <Button Text="Configure Device" Clicked="Config_Clicked" HorizontalOptions="End" FontSize="Medium" WidthRequest="200" HeightRequest="75"/>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

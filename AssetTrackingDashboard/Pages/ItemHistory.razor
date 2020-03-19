@@ -1,0 +1,102 @@
+﻿@page "/ItemHistory"
+@page "/ItemHistory/{Item}"
+@using System.Net.Http
+@inject HttpClient Http
+@using AssetTracking.Model
+
+<h3>Item History</h3>
+<p>@Item</p>
+
+
+<pre>
+<code>app.UseCors(policy => 
+        policy.WithOrigins("http://localhost:44318", "https://localhost:44318")
+        .AllowAnyMethod()
+        .WithHeaders(HeaderNames.ContentType));
+    </code>
+</pre>
+
+
+@if (history == null)
+{
+<p><em>Loading...</em></p>
+}
+else
+{
+<table class="table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Start (C)</th>
+            <th>End</th>
+            <th>Elapsed</th>
+            <th>Station</th>
+            <th>Action</th>
+            <th>Operator</th>
+            <th>Map</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in history)
+        {
+        <tr>
+            <td>@item.Id</td>
+            <td>@item.StartTime</td>
+            <td>@item.EndTime</td>
+            <td>@item.ElapsedTime</td>
+            <td>@item.StationCode</td>
+            <td>@item.ActionCode</td>
+            <td>@item.OperatorInitials</td>
+            <td>@item.Latitude , @item.Longitude</td>
+        </tr>
+       }
+    </tbody>
+</table>
+}
+@code {
+    [Parameter]
+    public string Item { get; set; }
+
+    private const string ServiceEndpoint = "https://assettrackingwebapi.azurewebsites.net/scan/getitemhistory";
+ //   private const string ServiceEndpoint2 = "https://assettrackingwebapi.azurewebsites.net/scan/getstationstatus";
+
+    private ScanHistory[] history;
+ //   private StationStatus[] stations;
+
+
+    protected override async Task OnInitializedAsync() => await GetItemHistory();
+//    protected override async Task OnInitializedAsync() => await GetStations();
+
+    private async Task GetItemHistory() =>
+    history = await Http.GetJsonAsync<ScanHistory[]>(ServiceEndpoint + "/" + Item);
+    
+//    private async Task GetStations() =>
+//    stations = await Http.GetJsonAsync<StationStatus[]>(ServiceEndpoint2);
+
+    public class ScanHistory
+    {
+        public int Id { get; set; }
+        public DateTime StartTime { get; set; }
+        public DateTime EndTime { get; set; }
+        public bool Inprocess =>  EndTime == DateTime.MinValue ? true : false ;
+        public int ElapsedTimeSinceCalc => (int)EndTime.Subtract(StartTime).TotalMinutes;
+        public int ElapsedTimeSinceStart => (int)DateTime.Now.Subtract(StartTime).TotalMinutes;
+        public int ElapsedTime =>  EndTime == DateTime.MinValue ?
+            (int)DateTime.Now.Subtract(StartTime).TotalMinutes :
+            (int)EndTime.Subtract(StartTime).TotalMinutes;
+        public int OperatorId { get; set; }
+        public string OperatorInitials { get; set; }
+        public string OperatorFirstName { get; set; }
+        public string OperatorLastName { get; set; }
+        public int ActionItemId { get; set; }
+        public string ActionCode { get; set; }
+        public string ActionDescription { get; set; }
+        public double Latitude { get; set; }
+        public double Longitude { get; set; }
+        public int StationId { get; set; }
+        public string StationCode { get; set; }
+        public string StationDescription { get; set; }
+
+    }
+
+}

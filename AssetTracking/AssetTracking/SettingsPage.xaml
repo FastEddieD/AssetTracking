@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AssetTracking.SettingsPage">
+    <ContentPage.Content>
+        <StackLayout>
+            <Label Text="Device Settings"
+                VerticalOptions="StartAndExpand" 
+                HorizontalOptions="CenterAndExpand" 
+                   FontSize="Large"/>
+            <Label Text="For more information about settings, please contact your vendor."/>
+            <Label Text="These settings can be reset to factory settings by clicking the reset button below."/>
+            <Label Text="Company/Workgroup ID"/>
+            <Entry Text="1"/>
+            <Label Text="WebURL"/>
+            <Entry Text="https://assettrackingwebapi.azurewebsites.net"/>
+            <Label Text="Refresh Interval"/>
+            <Slider Value="20" Minimum="0" Maximum="300" />
+            <Button Text="Reset" Clicked="ResetButton_Clicked"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

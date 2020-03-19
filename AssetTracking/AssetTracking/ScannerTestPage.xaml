@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AssetTracking.ScannerTestPage">
+    <ContentPage.Content>
+        <StackLayout>
+            <Label Text="Scanner Test Page"
+                VerticalOptions="StartAndExpand" 
+                HorizontalOptions="StartAndExpand" 
+                FontSize="Large"/>
+            <Label Text="Connecting / Pairing your Device" TextDecorations="Underline" FontSize="Medium"/>
+            <Label Text="During initial setup, you must first pair your Socket CHS with your device using the Socket Mobile Compainion Tool."/>
+            <Image Source="CHSScanner.png" HeightRequest="100" WidthRequest="100"/>
+            <Label Text="In the event of problems, you may need to unpair your device first.  Go to your Settings, Connected Devices, Previous Connections and Forget the Socket CHS Device if displayed"/>
+            <Label Text="Once connected, you can Test by scanning a barcode and it should display in the box below."/>
+            <Entry Text="{Binding ScanValue,Mode=TwoWay}" Placeholder="Scan an Item" PlaceholderColor="Aqua" Keyboard="Numeric"/>
+            <Label Text="{Binding DisplayMessage}"/>
+            <Button Text="Test Web Connection" Command="{Binding ConnectCommand}"/>
+            <ListView ItemsSource="{Binding ScanList}"/>
+            <ActivityIndicator IsRunning="{Binding IsConnected}"/>
+            <ActivityIndicator IsRunning="{Binding IsBusy}"/>
+            
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

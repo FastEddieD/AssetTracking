@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:AssetTracking"
+             x:Class="AssetTracking.ScanActionPage">
+    <ContentPage.Content>
+
+        <!--xmlns:maps="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps;assembly= Xamarain.Forms.Maps"-->
+
+        <StackLayout>
+            <Label Text="Live Scan Mode"
+                VerticalOptions="CenterAndExpand" 
+                HorizontalOptions="CenterAndExpand"
+                   FontSize="Large"/> 
+            <StackLayout Orientation="Horizontal">
+                <Label Text="{Binding LastScan.Station}" FontSize ="Medium" HorizontalOptions="Start"/>
+                <Label Text="{Binding LastScan.Action}" FontSize ="Medium" HorizontalOptions="CenterAndExpand" />
+                <Label Text="{Binding LastScan.Item}" FontSize ="Medium" HorizontalOptions="End"/>
+            </StackLayout>
+            <Label Text="Elapsed Time" HorizontalOptions="Center"/>
+            <!--<Label x:Name="ElapsedTime" Text="x{Binding ElapsedTime, StringFormat={}{0:hh':'mm':'ss}}" FontSize="Large"/>-->
+            <Label Text="{Binding ElapsedTimeDisplay}" FontSize = "Medium" HorizontalOptions = "Center"/>
+            <!--<Button x:Name="TestFadeButton" Text ="Fade" Clicked="NotifyValidScan"/>-->
+            <Label x:Name="SaveResult" Text="{Binding SaveResult}" BackgroundColor="Green" TextColor="White" FontSize="Medium" HorizontalTextAlignment="Center" />
+            
+
+            <Label Text="Station" HorizontalTextAlignment="Start"/>
+            <StackLayout Orientation="Horizontal">
+                <!--<Button Text="Location (Tap To Pick)" Command="{Binding ShowStationListCommand}" HorizontalOptions="FillAndExpand"/>-->
+                <!--<Label Text="Lock" WidthRequest="140" HorizontalTextAlignment="End"/>-->
+                <Picker Title="Pick Station" HorizontalOptions="FillAndExpand" ItemsSource="{Binding StationList}" ItemDisplayBinding="{Binding StationDescription}" SelectedItem="{Binding StationPicked, Mode=TwoWay}"/>
+                <!--<Entry Text="{Binding StationValue}" IsVisible ="False" Placeholder="Scan" PlaceholderColor="Red"/>-->
+                <Switch IsToggled="{Binding StationLocked}" HorizontalOptions="End"/>
+            </StackLayout>
+           
+            <StackLayout Orientation="Horizontal">
+                <Label Text="Action" HorizontalTextAlignment="Start"/>
+                <!--<Button Text="Action (Tap To Pick)" Command="{Binding ShowActionListCommand}" HorizontalOptions="FillAndExpand"/>-->
+            </StackLayout>
+            
+            <StackLayout Orientation="Horizontal">
+                <Picker Title ="Pick Action" HorizontalOptions="FillAndExpand" ItemsSource="{Binding ActionItemsList}" ItemDisplayBinding="{Binding ItemDescription}" SelectedItem="{Binding ActionPicked, Mode=TwoWay}"/>
+                <Entry Text="{Binding ActionValue}" IsVisible="False" Placeholder="Scan" PlaceholderColor="Aqua" Keyboard="Numeric"/>
+                <Switch IsToggled ="{Binding ActionLocked}" HorizontalOptions="End"/>
+            </StackLayout>
+            
+             <Label Text="Item"/>
+           
+            <Entry Text="{Binding ItemValue}" Placeholder="Scan" PlaceholderColor="Aqua" Keyboard="Numeric"/>
+            
+            <ActivityIndicator IsRunning="{Binding IsBusy}"/>
+            <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                <Button Text="Save" Command="{Binding SaveScanCommand}"/>
+                <Button Text="Clear" Command="{Binding ClearScanCommand}"/>
+                <Button Text="Upload" Command="{Binding UploadScansToServerCommand}"/>
+                <Button Text="Location" Command="{Binding ShowMapCommand}"/>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal">
+                 <Label Text="{Binding DisplayMessage}"/>
+                 <Label Text="{Binding ScanComplete}"/>
+            </StackLayout>
+        </StackLayout>
+        
+    </ContentPage.Content>
+</ContentPage>

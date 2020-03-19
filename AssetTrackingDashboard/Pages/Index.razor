@@ -1,0 +1,88 @@
+﻿@page "/"
+@using System.Net.Http
+@inject HttpClient Http
+@using AssetTracking.Model
+
+<h1>MobiTrax Dashboard</h1>
+
+<pre>
+    <code>app.UseCors(policy => 
+        policy.WithOrigins("http://localhost:44318", "https://localhost:44318")
+        .AllowAnyMethod()
+        .WithHeaders(HeaderNames.ContentType));
+    </code>
+</pre>
+
+@if (stations == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+<h2>
+    Click count: @currentCount / Item: @selectedItem
+</h2>
+<table class="table">
+    
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Code (C)</th>
+            <th>Description</th>
+            <th>Action</th>
+            <th>Item</th>
+            <th>Operator</th>
+            <th>Elapsed</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var sta in stations)
+        {
+            <tr>
+                <td>@sta.Id</td>
+                <td>@sta.Code</td>
+                <td>@sta.Description</td>
+                <td>@sta.ActionCode</td>
+                <td><a href="/itemhistory/@sta.Item" @onclick="@(e => viewItem(sta.Item))">@sta.Item </a></td>
+                <td>@sta.OperatorInitials</td>
+                <td>@sta.ElapsedTime</td>
+            </tr>
+        }
+    </tbody>
+</table>
+}
+
+@code {
+
+    private int currentCount = 0;
+    private string selectedItem;
+
+    private const string ServiceEndpoint = "https://assettrackingwebapi.azurewebsites.net/scan/getstationstatus";
+    //   private WeatherForecast[] forecasts;
+    private StationStatus[] stations;
+
+    protected override async Task OnInitializedAsync() => await GetStations();
+
+    private void viewItem(string Item)
+    {
+        currentCount++;
+        selectedItem = Item ;
+
+    }
+
+    private async Task GetStations() =>
+
+
+        stations = await Http.GetJsonAsync<StationStatus[]>(ServiceEndpoint);
+
+    public class WeatherForecast
+    {
+        public DateTime Date { get; set; }
+
+        public int TemperatureC { get; set; }
+
+        public string Summary { get; set; }
+
+        public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
+    }
+}

@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AssetTracking.InventoryPage">
+    <ContentPage.Content>
+        <StackLayout>
+            <Label Text="Inventory"
+                VerticalOptions="CenterAndExpand" 
+                HorizontalOptions="CenterAndExpand"
+                FontSize="Large"/>
+            <Label Text="Location"/>
+            <Entry/>
+            <Label Text="Qty"/>
+            <Stepper Value="1" Minimum="1" Increment="1"></Stepper>
+            <ListView>
+                
+            </ListView>
+            
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

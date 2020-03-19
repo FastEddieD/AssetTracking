@@ -1,0 +1,43 @@
+{
+  "Stations": [
+    {
+      "date": "1/2/2020",
+      "StationID": "1",
+      "Description": "Station 1",
+      "GridX": 200,
+      "GridY": 100,
+      "Height": 100,
+      "Width": 200,
+      "Shape": "circle",
+      "Color": "yellow",
+      "Status": "Running",
+      "Item": "12345"
+    },
+    {
+      "date": "1/3/2020",
+      "StationID": "2",
+      "Description": "Station 2",
+      "GridX": 100,
+      "GridY": 400,
+      "Height": 200,
+      "Width": 200,
+      "Shape": "circle",
+      "Color": "green",
+      "Status": "Loading",
+      "Item": "12345"
+    },
+    {
+      "date": "1/2/2020",
+      "StationID": "3",
+      "Description": "Station 1",
+      "GridX": 500,
+      "GridY": 100,
+      "Height": 300,
+      "Width": 100,
+      "Shape": "rectangle",
+      "Color": "blue",
+      "Status": "Loading",
+      "Item": "12345"
+    }
+  ]
+}

@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AssetTracking.StartupPage">
+    <ContentPage.Content>
+        <StackLayout>
+            <Label Text="MobiTrax Startup Settings"
+                VerticalOptions="StartAndExpand" 
+                HorizontalOptions="CenterAndExpand" 
+                FontSize="Large" />
+            <Label Text="Workgroup/Plant/Site" HorizontalTextAlignment="Start"/>
+            <StackLayout Orientation="Horizontal">
+                <Picker Title="Pick Location" HorizontalOptions="FillAndExpand" ItemsSource="{Binding PlantList}" ItemDisplayBinding="{Binding CompanyName}" SelectedItem="{Binding PlantPicked, Mode=TwoWay}"/>
+                <Entry Text="{Binding OperatorValue}" IsVisible ="False" Placeholder="Scan" PlaceholderColor="Red"/>
+            </StackLayout>
+            <Label Text="Operator/Device Name" HorizontalTextAlignment="Start"/>
+            <StackLayout Orientation="Horizontal">
+                <Picker Title="Pick Operator" HorizontalOptions="FillAndExpand" ItemsSource="{Binding OperatorList}" ItemDisplayBinding="{Binding OperatorDescription}" SelectedItem="{Binding OperatorPicked, Mode=TwoWay}"/>
+                <Entry Text="{Binding OperatorValue}" IsVisible ="False" Placeholder="Scan" PlaceholderColor="Red"/>
+            </StackLayout>
+              <Label Text="Dept/Area/Role" HorizontalTextAlignment="Start"/>
+            <StackLayout Orientation="Horizontal">
+                <Picker Title="Role" HorizontalOptions="FillAndExpand" ItemsSource="{Binding DeptList}" SelectedItem="{Binding DeptPicked, Mode=TwoWay}" ItemDisplayBinding="{Binding DeptDescription}"/>
+
+                <!--ItemDisplayBinding="{Binding Description}" SelectedItem="{Binding DeptPicked, Mode=TwoWay}"-->
+                <Entry Text="{Binding DeptValue}" IsVisible ="False" Placeholder="Scan" PlaceholderColor="Red"/>
+            </StackLayout>
+            <Label Text="Operating Mode" HorizontalTextAlignment="Start"/>
+            <StackLayout Orientation="Horizontal">
+                <Picker Title="Pick Mode" HorizontalOptions="FillAndExpand" ItemsSource="{Binding ModeList}" ItemDisplayBinding="{Binding Description}" SelectedItem="{Binding ModePicked, Mode=TwoWay}"/>
+                <Entry Text="{Binding ModeValue}" IsVisible ="False" Placeholder="Scan" PlaceholderColor="Red"/>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal">
+                <StackLayout Orientation="Vertical" Padding="20">
+                    <Label Text="Use GPS" HorizontalTextAlignment="Start"/>
+                    <Switch IsToggled ="{Binding UseGPS}" HorizontalOptions="Start"/>
+                </StackLayout>
+                <StackLayout Orientation="Vertical" Padding="20">
+                    <Label Text="Work Offline" HorizontalTextAlignment="Start"/>
+                    <Switch IsToggled ="{Binding WorkOffline}" HorizontalOptions="Start"/>
+                </StackLayout>
+                <StackLayout Orientation="Vertical" Padding="20">
+                    <Label Text="Sound Enabled" HorizontalTextAlignment="Start"/>
+                    <Switch IsToggled ="{Binding SoundEnabled}" HorizontalOptions="Start"/>
+                </StackLayout>
+                <StackLayout Orientation="Vertical" Padding="20">
+                    <Label Text="Timer On" HorizontalTextAlignment="Start"/>
+                    <Switch IsToggled ="{Binding IsClockRunning}" HorizontalOptions="Start"/>
+                </StackLayout>
+
+            </StackLayout>
+            <!--<StackLayout Orientation="Horizontal">
+                <Button Text="Clock In" Command="{Binding ClockInCommand}"  FontSize="Medium" WidthRequest="200" BackgroundColor="Green" TextColor="White"/>
+                <Button Text="Clock Out" Command="{Binding ClockOutCommand}" FontSize="Medium" WidthRequest="200" BackgroundColor="Red" TextColor="White"/>
+            </StackLayout>--> 
+            
+            <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Padding="15">
+                <Button Text="Start" Clicked="StartButton_Clicked" FontSize="Medium" WidthRequest="200" BackgroundColor="Red" TextColor="White"/>
+                <!--<Button Text="Load Lists" Command="{Binding GetBackgroundFilesCommand}"/>-->
+            </StackLayout>
+
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
